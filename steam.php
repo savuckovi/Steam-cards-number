@@ -26,12 +26,12 @@ if (mysqli_connect_errno($con))
 else
 	{
 		if (isset($_GET['brisi']) && !empty($_GET['brisi']) && $_GET['brisi']=='true' && sizeof($_GET['za_brisanje'])>0) {
-			$ima = true;
+			$exists = true;
 			foreach ($_GET['za_brisanje'] as $val){
 				mysqli_query($con,"DELETE FROM cards WHERE id='". $val. "'");
 			}
 			
-		} else $ima = false;
+		} else $exists = false;
 	
   
 		$date = date("Y-m-d H:i:s");
@@ -43,15 +43,15 @@ else
 			{
 			
 			
-				if ($row['igra'] == "Skyrim") $novi = $skyrim_uk;
-				else if ($row['igra'] == "Chivalry") $novi = $chivalry_uk;
-				else if ($row['igra'] == "Prison architect") $novi = $prison_uk;
+				if ($row['igra'] == "Skyrim") $newNum = $skyrim_uk;
+				else if ($row['igra'] == "Chivalry") $newNum = $chivalry_uk;
+				else if ($row['igra'] == "Prison architect") $newNum = $prison_uk;
 				
-				$razlika = $novi - $row['broj_karata'];
+				$difference = $newNum - $row['card_num'];
 
-				if ($razlika>0) $razlika = "+" . $razlika;
+				if ($difference>0) $difference = "+" . $difference;
 				
-				$vrijeme_baza = strtotime($row['vrijeme']);
+				$vrijeme_baza = strtotime($row['time']);
 				$vrijeme_sada = strtotime(date("Y-m-d H:i:s"));
 				$vrijeme_razlika = $vrijeme_sada-$vrijeme_baza;
 				
@@ -72,13 +72,13 @@ else
 					$vrijeme_raz = $vrijeme_razlika . "s";
 				}
 				
-				echo "<tr><td>". $row['igra'] . "</td><td>" . $row['broj_karata'] . "</td><td>" . $razlika . "</td><td>" . $row['vrijeme'] . "</td><td>". date("Y-m-d H:i:s") . "</td><td>" . $vrijeme_raz . "</td><td style='text-align: center'><input type='checkbox' name='za_brisanje[]' value='". $row['id'] ."'><br></td></tr>";			
+				echo "<tr><td>". $row['igra'] . "</td><td>" . $row['card_num'] . "</td><td>" . $difference . "</td><td>" . $row['time'] . "</td><td>". date("Y-m-d H:i:s") . "</td><td>" . $vrijeme_raz . "</td><td style='text-align: center'><input type='checkbox' name='za_brisanje[]' value='". $row['id'] ."'><br></td></tr>";			
 
 			}
 
 		echo "</form></table></div>";
 
-		if (!$ima) mysqli_query($con, "INSERT INTO cards (game, card_num, time) VALUES ('Skyrim','$skyrim_uk','$date'), ('Chivalry','$chivalry_uk','$date'),('Prison architect','$prison_uk','$date')");
+		if (!$exists) mysqli_query($con, "INSERT INTO cards (game, card_num, time) VALUES ('Skyrim','$skyrim_uk','$date'), ('Chivalry','$chivalry_uk','$date'),('Prison architect','$prison_uk','$date')");
 
 		mysqli_close($con);
 	}

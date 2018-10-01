@@ -28,7 +28,7 @@ else
 		if (isset($_GET['brisi']) && !empty($_GET['brisi']) && $_GET['brisi']=='true' && sizeof($_GET['za_brisanje'])>0) {
 			$ima = true;
 			foreach ($_GET['za_brisanje'] as $val){
-				mysqli_query($con,"DELETE FROM karte WHERE id='". $val. "'");
+				mysqli_query($con,"DELETE FROM cards WHERE id='". $val. "'");
 			}
 			
 		} else $ima = false;
@@ -36,7 +36,7 @@ else
   
 		$date = date("Y-m-d H:i:s");
 		 
-		$result = mysqli_query($con,"SELECT * FROM karte ORDER BY id DESC");
+		$result = mysqli_query($con,"SELECT * FROM cards ORDER BY id DESC");
 		echo "<div align='center'><table border='1' style='text-align: center'><form action='steam.php' method='get'><tr><td>Igra</td><td>Kolicina</td><td>Promjena</td><td style='width: 200px'>Vrijeme (spremljeno)</td><td style='width: 200px'>Vrijeme (sada)</td><td>Vrijeme (razlika)</td><td><button type='Submit' name='brisi' value='true'>Obrisi</button></td></tr>";
 
 		while($row = mysqli_fetch_array($result))
@@ -78,7 +78,7 @@ else
 
 		echo "</form></table></div>";
 
-		if (!$ima) mysqli_query($con, "INSERT INTO karte (igra, broj_karata, vrijeme) VALUES ('Skyrim','$skyrim_uk','$date'), ('Chivalry','$chivalry_uk','$date'),('Prison architect','$prison_uk','$date')");
+		if (!$ima) mysqli_query($con, "INSERT INTO cards (game, card_num, time) VALUES ('Skyrim','$skyrim_uk','$date'), ('Chivalry','$chivalry_uk','$date'),('Prison architect','$prison_uk','$date')");
 
 		mysqli_close($con);
 	}

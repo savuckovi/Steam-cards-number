@@ -23,14 +23,14 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `karte`
+-- Table structure for table `cards`
 --
 
-CREATE TABLE IF NOT EXISTS `karte` (
+CREATE TABLE IF NOT EXISTS `cards` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `igra` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `broj_karata` int(10) NOT NULL,
-  `vrijeme` datetime NOT NULL,
+  `game` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `card_num` int(10) NOT NULL,
+  `time` datetime NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=469 ;
 

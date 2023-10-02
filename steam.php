@@ -36,7 +36,7 @@ else
   
 		$date = date("Y-m-d H:i:s");
 		 
-		$result = mysqli_query($con,"SELECT * FROM cards ORDER BY id DESC");
+		$result = mysqli_query($con,"SELECT * FROM cards");
 		echo "<div align='center'><table border='1' style='text-align: center'><form action='steam.php' method='get'><tr><td>Igra</td><td>Kolicina</td><td>Promjena</td><td style='width: 200px'>Vrijeme (spremljeno)</td><td style='width: 200px'>Vrijeme (sada)</td><td>Vrijeme (razlika)</td><td><button type='Submit' name='brisi' value='true'>Obrisi</button></td></tr>";
 
 		while($row = mysqli_fetch_array($result))

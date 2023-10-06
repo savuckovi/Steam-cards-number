@@ -24,16 +24,7 @@ if (mysqli_connect_errno($con))
 		echo "Failed to connect to MySQL: " . mysqli_connect_error();
 	}
 else
-	{
-		if (isset($_GET['brisi']) && !empty($_GET['brisi']) && $_GET['brisi']=='true' && sizeof($_GET['za_brisanje'])>0) {
-			$ima = true;
-			foreach ($_GET['za_brisanje'] as $val){
-				mysqli_query($con,"DELETE FROM cards WHERE id='". $val. "'");
-			}
-			
-		} else $ima = false;
-	
-  
+	{	
 		$date = date("Y-m-d H:i:s");
 		 
 		$result = mysqli_query($con,"SELECT * FROM cards");

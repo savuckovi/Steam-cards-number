@@ -71,6 +71,15 @@ else
 
 		if (!$ima) mysqli_query($con, "INSERT INTO cards (game, card_num, time) VALUES ('Skyrim','$skyrim_uk','$date'), ('Chivalry','$chivalry_uk','$date'),('Prison architect','$prison_uk','$date')");
 
+		echo "<div align='center'><table border='1' style='text-align: center'><form action='steam.php' method='get'><tr><td>Store</td><td>Name</td></td></tr>";
+		$storesDb = mysqli_query($con,"SELECT * FROM stores");
+		
+		while($row = mysqli_fetch_array($storesDb))
+		{
+			echo "<tr><td>". $row['id'] . "</td><td>" . $row['name'] . "</td></tr>";			
+		}
+		echo "</form></table></div>";
+
 		mysqli_close($con);
 	}
 
